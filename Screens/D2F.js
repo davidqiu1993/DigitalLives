@@ -82,6 +82,7 @@ db.updateFeelingValue = function (detection, feeling, val) {
 
 
 export default class D2F extends React.Component{
+
 	testDetections (detectionList) {
 		db.init();
 
@@ -96,10 +97,12 @@ export default class D2F extends React.Component{
 	    	}
 	  	}
 	  	return feelingValues;
-	}
-
+	};
 
 	getPetFeelingKeyword (detectionList, petFeelings=null) {
+		if (detectionList === []){
+			return 'random';
+		}
 		if (petFeelings === null) {
 			petFeelings = {
 				"depraved": 0,

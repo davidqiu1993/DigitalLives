@@ -55,7 +55,7 @@ export default class PhotoScreen extends React.Component {
             </View>
           </Camera>
           <TouchableOpacity
-            onPress={this.updated2f.bind(this)}
+            onPress={this.takePicture.bind(this)}
             style = {styles.capture}>
             <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
               {' '}SNAP{' '}
@@ -68,8 +68,8 @@ export default class PhotoScreen extends React.Component {
 
   updated2f = async function() {
     console.log('in d2f');
-    D2F.detections = this.takePicture();
-    console.log("serano",D2F.detections);
+    global.detections = this.takePicture();
+    console.log("serano",global.detections);
   }
 
   takePicture = async function() {
@@ -86,7 +86,7 @@ export default class PhotoScreen extends React.Component {
               image: data.base64,
             })
           }).then((response) => response.json())
-            .then((responseJson) => { console.log('hi',responseJson["data"]["detections"], responseJson); return responseJson["data"]["detections"];} )
+            .then((responseJson) => { global.detections = responseJson["data"]["detections"]; console.log('hi',responseJson, global.detections);} )
         );
       console.log('in if');
     }
